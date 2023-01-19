@@ -10,7 +10,11 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marks) {
+  if(this.hasOwnProperty("marks") === false) {
+    return "Пользователь отчислен";
+  } else {
     this.marks.push(...marks);
+  }
 }
 
 Student.prototype.getAverage = function () {
