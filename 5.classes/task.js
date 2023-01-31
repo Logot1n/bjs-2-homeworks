@@ -93,18 +93,43 @@ class Library {
     }
 }
 
-let subjects
 class Student {
     constructor(name) {
         this.name = name;
-        subjects = {
-            name: [],
+        this.marks = {};
+    }
+
+    addMark(mark, subject) {
+        if(this.marks[subject] === undefined) {
+            this.marks[subject] = [];
+        }
+
+        if(mark >= 2 && mark <= 5) {
+            return this.marks[subject].push(mark);
+        } else {
+            return console.log("Оценка несоответствует значениям");
         }
     }
 
-    addMark(mark) {
-        if(mark < 2 && mark > 5) {
-            return;
+    getAverageBySubject(subject) {
+        if(this.marks[subject] === undefined) {
+            return 0;
+        } else {
+            let sumMarks = this.marks[subject].reduce((acc, mark) => acc + mark, 0);
+            let avgMark = sumMarks / this.marks[subject].length;
+            return avgMark;
         }
+    }
+
+    getAverage() {
+        let subjects = Object.keys(this.marks);
+        let sumAverageMarks = 0;
+        let totalSubjects = 0;
+        for(let subject of subjects) {
+            let averageMark = this.getAverageBySubject(subject);
+            sumAverageMarks += averageMark;
+            totalSubjects++;
+        }
+        return sumAverageMarks / totalSubjects;
     }
 }
