@@ -100,11 +100,10 @@ class Student {
     }
 
     addMark(mark, subject) {
-        if(this.marks[subject] === undefined) {
-            this.marks[subject] = [];
-        }
-
-        if(mark >= 2 && mark <= 5) {
+            if(mark >= 2 && mark <= 5) {
+                if(this.marks[subject] === undefined) {
+                    this.marks[subject] = [];
+                }
             return this.marks[subject].push(mark);
         } else {
             return console.log("Оценка несоответствует значениям");
@@ -130,6 +129,11 @@ class Student {
             sumAverageMarks += averageMark;
             totalSubjects++;
         }
-        return sumAverageMarks / totalSubjects;
+
+        if(totalSubjects === 0) {
+            return 0
+        } else {
+            return sumAverageMarks / totalSubjects;
+        }
     }
 }
